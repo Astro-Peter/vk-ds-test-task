@@ -71,17 +71,18 @@ def train(model, model2, x, y, device_name) -> nn.Module:
                 count_since_best += 1
             if epoch % 20 == 0:
                 print(f'Epoch [{epoch+1}/1000], Loss: {loss.item():.4f}')
-                print(train_history_acc_model_2[-1])
-                print(1 - (sum(ans2 != y2) / len(y2)))
-                print(1 - (sum(y2 != 1) / len(y2)))
+                # print(train_history_acc_model_2[-1])
+                # print(1 - (sum(ans2 != y2) / len(y2)))
+                # print(1 - (sum(y2 != 1) / len(y2)))
 
     plt.title('accuracy')
     plt.plot(test_history_acc)
     plt.plot(test_history_baseline)
     plt.plot(train_history_acc)
     plt.legend(['test', 'baseline', 'train'])
-    plt.show()
+    plt.savefig("training_acc.png")
 
+    plt.cla()
     plt.plot(train_history)
     plt.plot(test_history)
     plt.grid(True)
@@ -89,7 +90,7 @@ def train(model, model2, x, y, device_name) -> nn.Module:
     plt.xlabel('Эпоха')
     plt.ylabel('Ошибка')
     plt.legend(['train', 'test'])
-    plt.show()
+    plt.savefig("training_error.png")
     
     return model
 
